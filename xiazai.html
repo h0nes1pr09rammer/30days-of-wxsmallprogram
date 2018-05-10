@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="common.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="x-newbiepageauth" style="position:absolute;top:898px;left:66px;z-index: 0;width: 630px">
+    <button  onclick="investment()" type="button" style="background-color: #7ED321;width: 630px;height: 36px;color: #FFFFFF">立即投资</button>
+    <button  onclick="downApp()" type="button" style="background-color: #7ED321;width: 630px;height: 36px;color: #FFFFFF">下载App</button>
+</div>
+<div class="x-multibackgroundcontainer">
+    <div>
+        <img src="https://oss.weidai.com.cn/static_img_pic20180427151959122.jpg">
+    </div>
+</div>
+<div class="x-multibackgroundcontainer">
+    <div>
+        <img src="https://oss.weidai.com.cn/static_img_pic20180427151949387.jpg">
+    </div>
+</div>
+<div class="x-multibackgroundcontainer">
+    <div>
+        <img src="https://oss.weidai.com.cn/static_img_pic20180427151955399.jpg">
+    </div>
+</div>
+<script type="text/javascript">
+    function investment() {
+        window.location.href='http://m.gollton.com/wap/loan/loantender'
+    }
+    function downApp(){
+        var u = navigator.userAgent,
+            isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1,
+            isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+            urls = {
+                'android':'http://ftp-apk.pcauto.com.cn/pub/autoclub-5000-autowapDL1.apk',
+                'ios':'https://itunes.apple.com/cn/app/zhong-guo-che-you-hui/id640447959',
+                'other':'http://www1.pcauto.com.cn/app/20141120/pcautoapp/index.html'
+            };
+        //三元运算
+        // window.location.href = isAndroid? urls.android : isiOS? urls.ios : urls.other;
+        //简化
+        if(isAndroid){
+            window.location.href=urls.android;
+        }else if(isiOS){
+            window.location.href=urls.ios;
+        }else{
+            window.location.href=urls.other;
+        }
+    }
+</script>
+</body>
+</html>
