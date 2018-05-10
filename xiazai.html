@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="common.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </head>
 <body>
 <div class="x-newbiepageauth" style="position:absolute;top:898px;left:66px;z-index: 0;width: 630px">
@@ -19,6 +23,11 @@
 </div>
 
 <script type="text/javascript">
+    function shipei() {
+        var phoneScale = parseInt(window.screen.width) / 750;
+        document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
+    }
+    shipei();
     function investment() {
         window.location.href='http://m.gollton.com/wap/loan/loantender'
     }
