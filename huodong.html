@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Title</title>
     <link href="common.css" rel="stylesheet" type="text/css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <!--<meta name="viewport" content="width=750, minimum-scale=1.92, maximum-scale=1.92, user-scalable=no">-->
 </head>
 <body>
 <div class="x-newbiepageauth" style="position:absolute;top:600px;left:66px;z-index: 0">
@@ -71,9 +75,11 @@
     </form>
 </div>
 <div class="x-multibackgroundcontainer">
-    <div>
-        <img src="background.jpg">
-    </div>
+    <center>
+        <div>
+            <img src="background.jpg">
+        </div>
+    </center>
 </div>
 <!--<div class="x-multibackgroundcontainer">-->
     <!--<div>-->
@@ -86,6 +92,11 @@
     <!--</div>-->
 <!--</div>-->
 <script type="text/javascript">
+    function shipei() {
+        var phoneScale = parseInt(window.screen.width) / 750;
+        document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
+    }
+    shipei();
     var form = document.getElementById('registerForm');
     var phoneNumber = document.getElementById('phoneNumberTx');
     var password = document.getElementById('passwordTx');

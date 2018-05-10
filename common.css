@@ -59,6 +59,9 @@ input {
     color: #666;
     text-decoration: none;
 }
+.x-multibackgroundcontainer {
+    z-index: -1;
+}
 .x-button {
     display: inline-block;
     -moz-box-sizing: border-box;
