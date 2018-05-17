@@ -55,7 +55,7 @@
                 <!--</div>-->
             <!--</div>-->
         <!--</div>-->
-        <div class="x-center" id="red-tip" hidden>
+        <div class="red-tip" id="red-tip" hidden>
            <span id="red-tip-span" style="color: rgb(255, 255, 255);"></span>
         </div>
         <button  class="x-button register-button" type="submit" style="background-image: url(img/register_button.png);"></button>
@@ -89,7 +89,7 @@
     var redTipSpan = document.getElementById("red-tip-span")
     var usernameTx = document.getElementById("usernameTx")
     var reGetYzmBt1 = document.getElementById("reGetYzm");
-    var yzmTx = document.getElementById("yzmTx")
+    var yzm = document.getElementById("yzmTx")
     // var u = navigator.userAgent;
     // alert('u：'+u);
     // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
@@ -112,9 +112,9 @@
             redTipSpan.innerHTML = "密码不能为空"
             return false;
         }
-        if (yzmTx.value.length == 0){
-            yzmTx.hidden = false
-            yzmTx.innerHTML = "验证码不能为空"
+        if (yzm.value.length == 0){
+            redTip.hidden = false
+            redTipSpan.innerHTML = "验证码不能为空"
             return false;
         }
         if (password.value.length <6 || password.value.length>20){
@@ -127,6 +127,7 @@
             redTipSpan.innerHTML = "手机号格式不正确"
             return false;
         }
+        window.location.href='xiazai.html'
         // registerRequest(usernameTx.value,phoneNumber.value,password.value,yzmTx.value)
         return false;
     }
@@ -139,6 +140,9 @@
             alert("手机号格式不正确")
             return;
         }
+        reGetYzmBt.style.display = ""
+        getYzmBt.style.display = "none"
+        timedCount()
         // relogin(phoneNumber.value);
     }
     // function getPrice() {
