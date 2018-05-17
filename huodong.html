@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Title</title>
     <link href="css/common.css" rel="stylesheet" type="text/css"/>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <!--<meta name="viewport" content="width=750, minimum-scale=1.92, maximum-scale=1.92, user-scalable=no">-->
 </head>
 <body>
@@ -111,6 +112,11 @@
             redTipSpan.innerHTML = "密码不能为空"
             return false;
         }
+        if (yzmTx.value.length == 0){
+            yzmTx.hidden = false
+            yzmTx.innerHTML = "验证码不能为空"
+            return false;
+        }
         if (password.value.length <6 || password.value.length>20){
             redTip.hidden = false
             redTipSpan.innerHTML = "密码长度不正确"
@@ -121,53 +127,35 @@
             redTipSpan.innerHTML = "手机号格式不正确"
             return false;
         }
-        register()
+        // registerRequest(usernameTx.value,phoneNumber.value,password.value,yzmTx.value)
         return false;
     }
-    function register() {
-        window.location.href='xiazai.html'
-    }
     function getYzm() {
-        reGetYzmBt.style.display = ""
-        getYzmBt.style.display = "none"
-        timedCount()
-        // var request = new XMLHttpRequest(); // 新建XMLHttpRequest对象
-        //
-        // request.onreadystatechange = function () { // 状态发生变化时，函数被回调
-        //     if (request.readyState === 4) { // 成功完成
-        //         // 判断响应结果:
-        //         if (request.status === 200) {
-        //             // 成功，通过responseText拿到响应的文本:
-        //             return success(request.responseText);
-        //         } else {
-        //             // 失败，根据响应码判断失败原因:
-        //             return fail(request.status);
-        //         }
-        //     } else {
-        //         // HTTP请求还在继续...
-        //     }
-        // }
-        //
-        // // 发送请求:
-        // request.open('GET', 'https://www.liaoxuefeng.com/api/categories');
-        // request.send();
-        getPrice();
+        if (phoneNumber.value.length == 0){
+            alert("手机号不能为空")
+            return;
+        }
+        if (!isPoneAvailable(phoneNumber.value)){
+            alert("手机号格式不正确")
+            return;
+        }
+        // relogin(phoneNumber.value);
     }
-    function getPrice() {
-        var
-            js = document.createElement('script'),
-            head = document.getElementsByTagName('head')[0];
-        js.src = 'http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice';
-        head.appendChild(js);
-    }
-    function refreshPrice(data) {
-        // var p = document.getElementById('test-jsonp');
-        yzmTx.value = '当前价格：' +
-            data['0000001'].name +': ' +
-            data['0000001'].price + '；' +
-            data['1399001'].name + ': ' +
-            data['1399001'].price;
-    }
+    // function getPrice() {
+    //     var
+    //         js = document.createElement('script'),
+    //         head = document.getElementsByTagName('head')[0];
+    //     js.src = 'http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice';
+    //     head.appendChild(js);
+    // }
+    // function refreshPrice(data) {
+    //     // var p = document.getElementById('test-jsonp');
+    //     yzmTx.value = '当前价格：' +
+    //         data['0000001'].name +': ' +
+    //         data['0000001'].price + '；' +
+    //         data['1399001'].name + ': ' +
+    //         data['1399001'].price;
+    // }
     // function success(text) {
     //     phoneNumber.value = text;
     // }
@@ -199,6 +187,78 @@
             getYzmBt.style.display = ""
         }
         t=setTimeout("timedCount()",1000)
+    }
+    // //发送POST请求跳转到指定页面
+    // function httpPost(URL, PARAMS) {
+    //     form.action = URL;
+    //     form.method = "post";
+    //     // form.style.display = "none";
+    //
+    //     for (var x in PARAMS) {
+    //         var opt = document.createElement("textarea");
+    //         opt.name = x;
+    //         opt.value = PARAMS[x];
+    //         form.appendChild(opt);
+    //     }
+    //
+    //     document.body.appendChild(form);
+    //     form.submit();
+    //
+    //     return false;
+    // }
+    function relogin(account){
+
+        var d = {"account":account};
+        var jqxhr = $.ajax('http://tm.gollton.com/wap/system/reglogin', {
+            // xhrFields: {
+            //     withCredentials: true    // 前端设置是否带cookie
+            // },
+            // crossDomain: true,
+            type: "post",
+            // dataType: 'jsonp',
+            data: d,
+        }).done(function (data) {
+            alert('成功, 收到的数据: ' + JSON.stringify(data));
+            sendYzm();
+        }).fail(function (xhr, status) {
+            alert('失败: ' + xhr.status + ', 原因: ' + status);
+        }).always(function () {
+        });
+
+    }
+    function registerRequest(account,phoneCode,password) {
+        var d = {"account":account,
+        "phone_code":phoneCode,
+        "password":password};
+        var jqxhr = $.ajax('http://m.gollton.com/wap/system/register2', {
+            type: "post",
+            // dataType: 'json',
+            data: d,
+        }).done(function (data) {
+            alert('成功, 收到的数据: ' + JSON.stringify(data));
+            window.location.href='xiazai.html'
+        }).fail(function (xhr, status) {
+            alert('失败: ' + xhr.status + ', 原因: ' + status);
+        }).always(function () {
+        });
+
+    }
+    function sendYzm(account) {
+        var d = {"type":"reg"};
+        var jqxhr = $.ajax('http://m.gollton.com/wap/system/sendsms', {
+            type: "post",
+            // dataType: 'json',
+            data: d,
+        }).done(function (data) {
+            alert('成功, 收到的数据: ' + JSON.stringify(data));
+            reGetYzmBt.style.display = ""
+            getYzmBt.style.display = "none"
+            timedCount()
+        }).fail(function (xhr, status) {
+            alert('失败: ' + xhr.status + ', 原因: ' + status);
+        }).always(function () {
+        });
+
     }
 </script>
 </body>
