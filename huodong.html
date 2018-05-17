@@ -74,7 +74,22 @@
         </div>
     </center>
 </div>
+<div id="openByOut" style="position:absolute;top:600px;left:66px;z-index: -1" hidden>
+    <center>
+        <div>
+            <img src="img/phone.jpg">
+        </div>
+    </center>
+</div>
 <script type="text/javascript">
+    var openByOut = document.getElementById('openByOut')
+    if (browser.versions.mobile) {//判断是否是移动设备打开。browser代码在下面
+        var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+            //在微信中打开
+            openByOut.hidden = false
+        }
+    }
     function shipei() {
         var phoneScale = parseInt(window.screen.width) / 750;
         document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
