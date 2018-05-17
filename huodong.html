@@ -12,6 +12,11 @@
     <!--<meta name="viewport" content="width=750, minimum-scale=1.92, maximum-scale=1.92, user-scalable=no">-->
 </head>
 <body>
+<div id="openByOut" style="position:absolute;top:600px;z-index: 1" hidden>
+    <div>
+        <img src="img/phone.jpg">
+    </div>
+</div>
 <div class="x-newbiepageauth" style="position:absolute;top:600px;left:66px;z-index: 0">
     <form id="registerForm" onsubmit="return checkForm()">
         <div>
@@ -73,11 +78,6 @@
             <img src="img/background.jpg">
         </div>
     </center>
-</div>
-<div id="openByOut" style="position:absolute;z-index: 1" hidden>
-        <div>
-            <img src="img/phone.jpg">
-        </div>
 </div>
 <script type="text/javascript">
     var openByOut = document.getElementById('openByOut')
