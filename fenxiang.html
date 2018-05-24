@@ -114,7 +114,7 @@
     </div>
     <div class="content">
         <div class="share_url">
-            <input id="phoneNumberTx" type="text" class="x-textbox" placeholder="未登录">
+            <input id="phoneNumberTx" type="text"  placeholder="未登录">
         </div>
         <div class="share_bt">
             <button  class="x-button share-button" onclick="testClick()" style="background-image: url(img/share_bt_bg.png);"></button>
@@ -148,12 +148,13 @@
     // 发送消息给Android
     function testClick() {
         var data = document.getElementById("phoneNumberTx").value;
+        alert(data)
         // 调用java中的方法  submitFromWeb是方法名
         window.WebViewJavascriptBridge.callHandler(
             'submitFromWeb'
             , {'param': data}
             , function(responseData) {
-                alert(responseData)
+                alert("测试")
             }
         );
         // alert("测试")
