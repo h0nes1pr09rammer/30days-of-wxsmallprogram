@@ -147,12 +147,12 @@
     shipei();
     // 发送消息给Android
     function testClick() {
-        var data = document.getElementById("phoneNumberTx").value;
-        alert(data)
+        // var data = document.getElementById("phoneNumberTx").value;
+        // alert(data)
         // 调用java中的方法  submitFromWeb是方法名
         window.WebViewJavascriptBridge.callHandler(
             'submitFromWeb'
-            , {'param': data}
+            , {'param': "测试"}
             , function(responseData) {
                 alert("测试")
             }
