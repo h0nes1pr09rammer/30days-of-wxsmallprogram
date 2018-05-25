@@ -166,9 +166,8 @@
         // alert("测试")
         share()
     }
-
+    var shareUrl
     function share() {
-        var shareUrl =  document.getElementById("phoneNumberTx").value
         alert(shareUrl)
         window.WebViewJavascriptBridge.callHandler(
             'share'
@@ -179,25 +178,25 @@
         );
     }
 
-    function getShareUrl(){
-        window.WebViewJavascriptBridge.callHandler(
-            'requestRecordList'
-            , {'param': "测试"}
-            , function(responseData) {
-                alert("测试")
-            }
-        );
-    }
-
-    function getHistoryInfo(){
-        window.WebViewJavascriptBridge.callHandler(
-            'getHistoryInfo'
-            , {'param': "测试"}
-            , function(responseData) {
-                alert("测试")
-            }
-        );
-    }
+    // function getShareUrl(){
+    //     window.WebViewJavascriptBridge.callHandler(
+    //         'requestRecordList'
+    //         , {'param': "测试"}
+    //         , function(responseData) {
+    //             alert("测试")
+    //         }
+    //     );
+    // }
+    //
+    // function getHistoryInfo(){
+    //     window.WebViewJavascriptBridge.callHandler(
+    //         'getHistoryInfo'
+    //         , {'param': "测试"}
+    //         , function(responseData) {
+    //             alert("测试")
+    //         }
+    //     );
+    // }
 
 
     // 注册事件监听
@@ -229,7 +228,8 @@
         bridge.registerHandler("initData", function(data, responseCallback) {
             alert(data);
             var result = JSON.parse(data)
-            document.getElementById("phoneNumberTx").innerHTML = result.data.share_url
+            shareUrl = result.data.share_url
+            document.getElementById("phoneNumberTx").innerHTML = shareUrl
             // var responseData = "我接受到了安卓的调用";
             // responseCallback(responseData);
         });
