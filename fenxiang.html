@@ -224,7 +224,7 @@
         });
 
         // 接收安卓发来的消息 并返回给安卓通知
-        bridge.registerHandler("functionInJs", function(data, responseCallback) {
+        bridge.registerHandler("initData", function(data, responseCallback) {
             alert(data);
             var responseData = "我接受到了安卓的调用";
             responseCallback(responseData);
