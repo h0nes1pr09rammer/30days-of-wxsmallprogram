@@ -169,6 +169,7 @@
 
     function share() {
         var shareUrl =  document.getElementById("phoneNumberTx").value
+        alert(shareUrl)
         window.WebViewJavascriptBridge.callHandler(
             'share'
             , shareUrl
