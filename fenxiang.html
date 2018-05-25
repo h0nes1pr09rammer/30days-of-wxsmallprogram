@@ -146,7 +146,11 @@
         document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
     }
     shipei();
-    getShareUrl();
+    window.onload=function (){
+
+        getShareUrl();
+
+    }
     // 发送消息给Android
     function testClick() {
         // var data = document.getElementById("phoneNumberTx").value;
