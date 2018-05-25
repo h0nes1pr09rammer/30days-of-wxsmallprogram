@@ -227,7 +227,7 @@
         bridge.registerHandler("initData", function(data, responseCallback) {
             // alert(data);
             var result = JSON.parse(data)
-            document.getElementById("phoneNumberTx").innerHTML = result.code + "------"+data
+            document.getElementById("phoneNumberTx").value = result.code + "------"+data
             // var responseData = "我接受到了安卓的调用";
             // responseCallback(responseData);
         });
