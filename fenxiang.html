@@ -115,7 +115,7 @@
     </div>
     <div class="content">
         <div class="share_url">
-            <input id="phoneNumberTx" type="text"  placeholder="未登录">
+            <span id="phoneNumberTx" ></span>
         </div>
         <div class="share_bt">
             <button  class="x-button share-button" onclick="testClick()" style="background-image: url(img/share_bt_bg.png);"></button>
@@ -225,9 +225,9 @@
 
         // 接收安卓发来的消息 并返回给安卓通知
         bridge.registerHandler("initData", function(data, responseCallback) {
-            // alert(data);
+            alert(data);
             var result = JSON.parse(data)
-            document.getElementById("phoneNumberTx").value = result.code + "------"+data
+            document.getElementById("phoneNumberTx").innerHTML = result.code + "------"+data
             // var responseData = "我接受到了安卓的调用";
             // responseCallback(responseData);
         });
