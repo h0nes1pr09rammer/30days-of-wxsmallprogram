@@ -35,11 +35,12 @@
         .main .content .share_url input{
             max-width: 570px;
             width: 100%;
-            height: 78px;
+            height: 40px;
             font-size: 26px;
             padding: 0 30px;
-            border-radius: 10px;
+            border-radius: 50px;
             margin-left: 60px;
+            text-align:center;
         }
         .main .content .share_url{
             margin-top: 1500px;
@@ -52,7 +53,7 @@
             /*text-align: center;*/
         }
         .main .content .history_bt{
-            margin-top: 400px;
+            margin-top: 440px;
             position: relative;
             /*text-align: center;*/
         }
@@ -145,6 +146,7 @@
         document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
     }
     shipei();
+    getShareUrl()
     // 发送消息给Android
     function testClick() {
         // var data = document.getElementById("phoneNumberTx").value;
@@ -159,6 +161,37 @@
         );
         // alert("测试")
     }
+
+    function share() {
+        window.WebViewJavascriptBridge.callHandler(
+            'share'
+            , {'param': "测试"}
+            , function(responseData) {
+                alert("测试")
+            }
+        );
+    }
+
+    function getShareUrl(){
+        window.WebViewJavascriptBridge.callHandler(
+            'requestRecordList'
+            , {'param': "测试"}
+            , function(responseData) {
+                alert("测试")
+            }
+        );
+    }
+
+    function getHistoryInfo(){
+        window.WebViewJavascriptBridge.callHandler(
+            'getHistoryInfo'
+            , {'param': "测试"}
+            , function(responseData) {
+                alert("测试")
+            }
+        );
+    }
+
 
     // 注册事件监听
     function connectWebViewJavascriptBridge(callback) {
