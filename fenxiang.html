@@ -45,7 +45,7 @@
         .main .content .share_url{
             margin-top: 1500px;
             position: relative;
-            text-align: center;
+            /*text-align: center;*/
         }
         .main .content .share_bt{
             margin-top: 50px;
@@ -168,9 +168,10 @@
     }
 
     function share() {
+        var shareUrl =  document.getElementById("phoneNumberTx").value
         window.WebViewJavascriptBridge.callHandler(
             'share'
-            , {'param': "测试"}
+            , shareUrl
             , function(responseData) {
                 alert("测试")
             }
