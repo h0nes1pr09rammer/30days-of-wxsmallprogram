@@ -41,7 +41,6 @@
             width: 570px;
             height: 40px;
             font-size: 20px;
-            /*padding: 0 30px;*/
             border-radius: 50px;
             text-align: center;
             background-color: #fff;
@@ -171,7 +170,7 @@
                     style="background-image: url(img/share_bt_bg.png);"></button>
         </div>
         <div class="history_income">
-            <span id="income" style="font-size: 100px;margin-right: 20px" class="x-button history-button">0</span>
+            <span id="income" style="font-size: 100px;" class="x-button history-button">0</span>
         </div>
         <div class="history_tx">
             <!--<div id="friend">-->
@@ -225,7 +224,6 @@
             'share'
             , shareUrl
             , function (responseData) {
-                alert("测试")
             }
         );
     }
@@ -278,7 +276,7 @@
                     tbody.appendChild(trow);
                 }
             }
-            document.getElementById("income").innerHTML = result.data.income
+            document.getElementById("income").innerHTML = result.data.income+"元"
             document.getElementById("phoneNumberTx").innerHTML = shareUrl
         });
     })
