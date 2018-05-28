@@ -13,6 +13,7 @@
             max-width: 750px;
             margin: 0 auto;
         }
+
         .main {
             width: 100%;
             /*background: url(/img/yq_bg.jpg) no-repeat 0 0/100%;*/
@@ -20,43 +21,57 @@
             overflow: hidden;
             /*padding: 2.23rem 0 .41rem;*/
         }
+
         .main .bg {
             width: 100%;
             overflow: hidden;
             z-index: -1;
-            position:absolute;
+            position: absolute;
         }
+
         .main .content {
             width: 100%;
             overflow: hidden;
             z-index: 0;
-            position:absolute;
+            position: absolute;
         }
-        .main .content .share_url span{
+
+        .main .content .share_url span {
             width: 570px;
             height: 40px;
             font-size: 26px;
             padding: 0 30px;
             border-radius: 50px;
             margin-left: 60px;
-            text-align:center;
+            text-align: center;
             background-color: #fff;
+            font-size: 14px;
         }
-        .main .content .share_url{
+
+        .main .content .share_url {
             margin-top: 1500px;
             position: relative;
             /*text-align: center;*/
         }
-        .main .content .share_bt{
+
+        .main .content .share_bt {
             margin-top: 50px;
             position: relative;
             /*text-align: center;*/
         }
-        .main .content .history_bt{
-            margin-top: 440px;
+
+        .main .content .history_tx {
+            margin-top: 460px;
             position: relative;
             /*text-align: center;*/
         }
+
+        .main .content .history_tb {
+            margin-top: 5px;
+            position: relative;
+            /*text-align: center;*/
+        }
+
         .x-button {
             display: inline-block;
             -moz-box-sizing: border-box;
@@ -78,31 +93,51 @@
             -moz-transition: border-color ease-in-out 0.2s, background-color ease-in-out 0.2s;
             transition: border-color ease-in-out 0.2s, background-color ease-in-out 0.2s;
         }
+
         .x-button {
             border: none !important;
             background-color: transparent !important;
             background-repeat: no-repeat;
             background-size: contain;
         }
-        .share-button{
+
+        .share-button {
             width: 630px;
             height: 90px;
             margin-left: 150px;
         }
-        .history-button{
+
+        .history-button {
+            width: 630px;
+            margin-left: 60px;
+            text-align: center;
+            color: #fbeb52;
+            font-size: 28px;
+        }
+
+        .history-tb {
             width: 630px;
             height: 90px;
-            margin-left: 120px;
+            margin-left: 60px;
         }
+
+        td {
+            text-align: center;
+        }
+        tr {
+            text-align: center;
+            height:40px;
+        }
+
         /*img{*/
-            /*width: 100%;*/
-            /*border: 0 none;*/
-            /*vertical-align: middle;*/
+        /*width: 100%;*/
+        /*border: 0 none;*/
+        /*vertical-align: middle;*/
         /*}*/
         /*html, body {*/
-            /*overflow-x: hidden;*/
-            /*margin: 0 !important;*/
-            /*-webkit-tap-highlight-color: transparent;*/
+        /*overflow-x: hidden;*/
+        /*margin: 0 !important;*/
+        /*-webkit-tap-highlight-color: transparent;*/
         /*}*/
     </style>
 
@@ -115,88 +150,68 @@
     </div>
     <div class="content">
         <div class="share_url">
-            <span id="phoneNumberTx" >未登录</span>
+            <span id="phoneNumberTx">未登录</span>
         </div>
         <div class="share_bt">
-            <button  class="x-button share-button" onclick="testClick()" style="background-image: url(img/share_bt_bg.png);"></button>
+            <button class="x-button share-button" onclick="share()"
+                    style="background-image: url(img/share_bt_bg.png);"></button>
         </div>
-        <div class="history_bt">
-            <div id="friend">
-                <button  class="x-button history-button" onclick="friendClick()" style="background-image: url(img/history_friend.png);"></button>
-            </div>
-            <div id="jiangli"  style="display:none;">
-                <button  class="x-button history-button" onclick="jiangliClick()" style="background-image: url(img/history_jiangli.png);"></button>
-            </div>
+        <div class="history_tx">
+            <!--<div id="friend">-->
+            <!--<button  class="x-button history-button" onclick="friendClick()" style="background-image: url(img/history_friend.png);"></button>-->
+            <!--</div>-->
+            <!--<div id="jiangli"  style="display:none;">-->
+            <!--<button  class="x-button history-button" onclick="jiangliClick()" style="background-image: url(img/history_jiangli.png);"></button>-->
+            <!--</div>-->
+            <span class="x-button history-button">推广记录</span>
+        </div>
+        <div class="history_tb">
+            <table id="tb_main" class="history-tb" width="600" border="1" cellspacing="0" bordercolor="#ffefd"
+                   align="center">
+                <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>投资总额</th>
+                    <th>还款总额</th>
+                </tr>
+                </thead>
+                <tbody id="tbMain"></tbody>
+            </table>
         </div>
     </div>
 </div>
 <script>
     var friend = document.getElementById("friend")
     var jiangli = document.getElementById("jiangli")
+
     function friendClick() {
         friend.style.display = "none"
         jiangli.style.display = ""
     }
+
     function jiangliClick() {
         friend.style.display = ""
         jiangli.style.display = "none"
     }
+
     function shipei() {
         var phoneScale = parseInt(window.screen.width) / 750;
         document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
     }
+
     shipei();
-    window.onload=function (){
 
-        getShareUrl();
-
-    }
-    // 发送消息给Android
-    function testClick() {
-        // var data = document.getElementById("phoneNumberTx").value;
-        // alert(data)
-        // 调用java中的方法  submitFromWeb是方法名
-        // window.WebViewJavascriptBridge.callHandler(
-        //     'submitFromWeb'
-        //     , {'param': "测试"}
-        //     , function(responseData) {
-        //         alert("测试")
-        //     }
-        // );
-        // alert("测试")
-        share()
-    }
     var shareUrl
+
     function share() {
-        alert(shareUrl)
         window.WebViewJavascriptBridge.callHandler(
             'share'
             , shareUrl
-            , function(responseData) {
+            , function (responseData) {
                 alert("测试")
             }
         );
     }
-
-    // function getShareUrl(){
-    //     window.WebViewJavascriptBridge.callHandler(
-    //         'requestRecordList'
-    //         , {'param': "测试"}
-    //         , function(responseData) {
-    //             alert("测试")
-    //         }
-    //     );
-    // }
-    //
-    // function getHistoryInfo(){
-    //     window.WebViewJavascriptBridge.callHandler(
-    //         'getHistoryInfo'
-    //         , {'param': "测试"}
-    //         , function(responseData) {
-    //             alert("测试")
-    //         }
-    //     );
-    // }
 
 
     // 注册事件监听
@@ -206,7 +221,7 @@
         } else {
             document.addEventListener(
                 'WebViewJavascriptBridgeReady'
-                , function() {
+                , function () {
                     callback(WebViewJavascriptBridge)
                 },
                 false
@@ -215,25 +230,91 @@
     }
 
     // 注册回调函数，第一次连接时调用 初始化函数
-    connectWebViewJavascriptBridge(function(bridge) {
+    connectWebViewJavascriptBridge(function (bridge) {
         //初始化
-        bridge.init(function(message, responseCallback) {
+        bridge.init(function (message, responseCallback) {
             var data = {
                 'Javascript Responds': 'Hello jarry!'
             };
             responseCallback(data);
         });
 
-        // 接收安卓发来的消息 并返回给安卓通知
-        bridge.registerHandler("initData", function(data, responseCallback) {
+        bridge.registerHandler("initData", function (data, responseCallback) {
             alert(data);
             var result = JSON.parse(data)
             shareUrl = result.data.share_url
+            var tbody = document.getElementById('tbMain');
+            var per = result.data.items
+            if (per.length == 0){
+                tb.style.display = "none"
+            }else if(per.length < 3){
+                tb.style.display = ""
+                for(var i = 0;i < per.length; i++){ //遍历一下json数据
+                    var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
+                    tbody.appendChild(trow);
+                }
+            }else{
+                tb.style.display = ""
+                for(var i = 0;i < 3; i++){ //遍历一下json数据
+                    var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
+                    tbody.appendChild(trow);
+                }
+            }
             document.getElementById("phoneNumberTx").innerHTML = shareUrl
-            // var responseData = "我接受到了安卓的调用";
-            // responseCallback(responseData);
         });
     })
+    // window.onload = function(){
+    //     var tbody = document.getElementById('tbMain');
+    //     var per = [{
+    //         "id": 109,
+    //         "spreaded_member_name": "yb18069850856",
+    //         "status": 1,
+    //         "tender_success_amount": 0,
+    //         "spreaded_member_id": 109,
+    //         "repay_amount_yes": 0,
+    //         "add_time": 1527142654,
+    //         "member_name": "yb18069850856",
+    //         "type": 2,
+    //         "is_extension_red": "-1",
+    //         "member_id": 105
+    //     }, {
+    //         "id": 110,
+    //         "spreaded_member_name": "yw15824444396",
+    //         "status": 1,
+    //         "tender_success_amount": 0,
+    //         "spreaded_member_id": 110,
+    //         "repay_amount_yes": 0,
+    //         "add_time": 1527142702,
+    //         "member_name": "yw15824444396",
+    //         "type": 2,
+    //         "is_extension_red": "-1",
+    //         "member_id": 105
+    //     }]
+    //     var tb = document.getElementById('tb_main');
+    //     if (per.length == 0){
+    //         tb.style.display = "none"
+    //     }else{
+    //         tb.style.display = ""
+    //         for(var i = 0;i < per.length; i++){ //遍历一下json数据
+    //             var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
+    //             tbody.appendChild(trow);
+    //         }
+    //     }
+    // }
+
+    function getDataRow(h) {
+        var row = document.createElement('tr'); //创建行
+        var idCell = document.createElement('td'); //创建第一列id
+        idCell.innerHTML = h.spreaded_member_name; //填充数据
+        row.appendChild(idCell); //加入行 ，下面类似
+        var nameCell = document.createElement('td');//创建第二列name
+        nameCell.innerHTML = h.tender_success_amount;
+        row.appendChild(nameCell);
+        var jobCell = document.createElement('td');//创建第三列job
+        jobCell.innerHTML = h.repay_amount_yes;
+        row.appendChild(jobCell);
+        return row; //返回tr数据
+    }
 </script>
 </body>
 </html>
