@@ -244,6 +244,7 @@
             var result = JSON.parse(data)
             shareUrl = result.data.share_url
             var tbody = document.getElementById('tbMain');
+            var tb = document.getElementById('tb_main');
             var per = result.data.items
             if (per.length == 0){
                 tb.style.display = "none"
