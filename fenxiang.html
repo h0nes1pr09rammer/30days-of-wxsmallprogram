@@ -58,13 +58,13 @@
         }
 
         .main .content .share_bt {
-            margin-top: 50px;
+            margin-top: 40px;
             position: relative;
             text-align: center;
             width: 100%;
         }
         .main .content .history_income {
-            margin-top: 230px;
+            margin-top: 220px;
             position: relative;
             text-align: center;
             width: 100%;
@@ -163,7 +163,8 @@
     </div>
     <div class="content">
         <div class="share_url">
-            <span id="phoneNumberTx">未登录</span>
+            <span id="phoneNumberTx">未登录
+            </span>
         </div>
         <div class="share_bt">
             <button class="x-button share-button" onclick="share()"
@@ -215,17 +216,33 @@
         document.write('<meta name="viewport" content="width=750, minimum-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=no">');
     }
 
-    shipei();
-
+    shipei()
+    isFrom();
+    var dev = "wap"
     var shareUrl
-
-    function share() {
+    function isFrom() {
+        // copyText(shareUrl)
         window.WebViewJavascriptBridge.callHandler(
-            'share'
-            , shareUrl
+            'from'
+            , ""
             , function (responseData) {
+                dev = responseData;
             }
         );
+    }
+
+    function share() {
+
+        if(dev == 'android'){
+            window.WebViewJavascriptBridge.callHandler(
+                'share'
+                , shareUrl
+                , function (responseData) {
+                }
+            );
+        }else{
+            copyText(shareUrl)
+        }
     }
 
 
@@ -280,6 +297,15 @@
             document.getElementById("phoneNumberTx").innerHTML = shareUrl
         });
     })
+    function copyText(obj) {
+        var rng = document.body.createTextRange();
+        rng.moveToElementText(obj);
+        rng.scrollIntoView();
+        rng.select();
+        rng.execCommand("Copy");
+        rng.collapse(false);
+        alert("复制成功!");
+    }
     // window.onload = function(){
     //     var tbody = document.getElementById('tbMain');
     //     var per = [{
