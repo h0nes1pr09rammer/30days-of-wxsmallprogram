@@ -189,7 +189,7 @@
                 <tr>
                     <th>用户名</th>
                     <th>投资总额</th>
-                    <th>还款总额</th>
+                    <!--<th>还款总额</th>-->
                 </tr>
                 </thead>
                 <tbody id="tbMain"></tbody>
@@ -217,19 +217,19 @@
     }
 
     shipei()
-    isFrom();
+    // isFrom();
     var dev = "wap"
     var shareUrl
-    function isFrom() {
-        // copyText(shareUrl)
-        window.WebViewJavascriptBridge.callHandler(
-            'from'
-            , ""
-            , function (responseData) {
-                dev = responseData;
-            }
-        );
-    }
+    // function isFrom() {
+    //     // copyText(shareUrl)
+    //     window.WebViewJavascriptBridge.callHandler(
+    //         'from'
+    //         , ""
+    //         , function (responseData) {
+    //             dev = responseData;
+    //         }
+    //     );
+    // }
 
     function share() {
 
@@ -246,118 +246,100 @@
     }
 
 
-    // 注册事件监听
-    function connectWebViewJavascriptBridge(callback) {
-        if (window.WebViewJavascriptBridge) {
-            callback(WebViewJavascriptBridge)
-        } else {
-            document.addEventListener(
-                'WebViewJavascriptBridgeReady'
-                , function () {
-                    callback(WebViewJavascriptBridge)
-                },
-                false
-            );
-        }
-    }
+    // // 注册事件监听
+    // function connectWebViewJavascriptBridge(callback) {
+    //     if (window.WebViewJavascriptBridge) {
+    //         callback(WebViewJavascriptBridge)
+    //     } else {
+    //         document.addEventListener(
+    //             'WebViewJavascriptBridgeReady'
+    //             , function () {
+    //                 callback(WebViewJavascriptBridge)
+    //             },
+    //             false
+    //         );
+    //     }
+    // }
 
-    // 注册回调函数，第一次连接时调用 初始化函数
-    connectWebViewJavascriptBridge(function (bridge) {
-        //初始化
-        bridge.init(function (message, responseCallback) {
-            var data = {
-                'Javascript Responds': 'Hello jarry!'
-            };
-            responseCallback(data);
-        });
+    // // 注册回调函数，第一次连接时调用 初始化函数
+    // connectWebViewJavascriptBridge(function (bridge) {
+    //     //初始化
+    //     bridge.init(function (message, responseCallback) {
+    //         var data = {
+    //             'Javascript Responds': 'Hello jarry!'
+    //         };
+    //         responseCallback(data);
+    //     });
 
-        bridge.registerHandler("initData", function (data, responseCallback) {
-            // alert(data);
-            var result = JSON.parse(data)
+    //     bridge.registerHandler("initData", function (data, responseCallback) {
+    //         // alert(data);
+    //         var result = JSON.parse(data)
+    //         shareUrl = result.data.share_url
+    //         var tbody = document.getElementById('tbMain');
+    //         var tb = document.getElementById('tb_main');
+    //         var per = result.data.items
+    //         if (per.length == 0){
+    //             tb.style.display = "none"
+    //         }else if(per.length < 3){
+    //             tb.style.display = ""
+    //             for(var i = 0;i < per.length; i++){ //遍历一下json数据
+    //                 var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
+    //                 tbody.appendChild(trow);
+    //             }
+    //         }else{
+    //             tb.style.display = ""
+    //             for(var i = 0;i < 3; i++){ //遍历一下json数据
+    //                 var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
+    //                 tbody.appendChild(trow);
+    //             }
+    //         }
+    //         // document.getElementById("income").innerHTML = result.data.income+"元"
+    //         document.getElementById("phoneNumberTx").innerHTML = shareUrl
+    //     });
+    // })
+    // function copyText(obj) {
+    //     var rng = document.body.createTextRange();
+    //     rng.moveToElementText(obj);
+    //     rng.scrollIntoView();
+    //     rng.select();
+    //     rng.execCommand("Copy");
+    //     rng.collapse(false);
+    //     alert("复制成功!");
+    // }
+    show()
+    show()
+    function show(){
+        var jsonDate = "{\"code\":200,\"result\":\"success\",\"data\":{\"page\":1,\"epage\":10,\"total_items\":2,\"total_pages\":1,\"items\":[{\"id\":91,\"spreaded_member_name\":\"di15824444368\",\"status\":1,\"tender_success_amount\":20000,\"spreaded_member_id\":91,\"repay_amount_yes\":0,\"add_time\":1528861230,\"member_name\":\"di15824444368\",\"type\":2,\"is_extension_red\":\"-1\",\"member_id\":71},{\"id\":92,\"spreaded_member_name\":\"li13777361357\",\"status\":1,\"tender_success_amount\":5000,\"spreaded_member_id\":92,\"repay_amount_yes\":0,\"add_time\":1528861315,\"member_name\":\"li13777361357\",\"type\":2,\"is_extension_red\":\"1\",\"member_id\":71}],\"share_url\":\"http:\\\/\\\/tm.gollton.com\\\/wap\\\/common\\\/member\\\/reg?invite=bHpxMTIzNA==\",\"share_title\":\"\",\"share_content\":\"\",\"limit\":\"0\",\"total\":{\"accounted\":0,\"accounting\":0,\"unAaccount\":400},\"income\":400,\"person_count\":2,\"tender_income\":400,\"repay_income\":0},\"description\":\"\",\"xmdy\":null,\"diyou\":null}"
+        var result = JSON.parse(jsonDate)
             shareUrl = result.data.share_url
             var tbody = document.getElementById('tbMain');
+            tbody.innerHTML = ''
             var tb = document.getElementById('tb_main');
             var per = result.data.items
+            document.getElementById("income").innerHTML = ""+result.data.income+"元"
+            document.getElementById("phoneNumberTx").innerHTML = shareUrl
             if (per.length == 0){
                 tb.style.display = "none"
             }else if(per.length < 3){
                 tb.style.display = ""
-                for(var i = 0;i < per.length; i++){ //遍历一下json数据
-                    var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
-                    tbody.appendChild(trow);
-                }
+            
+                for (let i = 0; i < per.length; i++) {
+                    let tr = document.createElement('tr')
+                    tr.innerHTML = '<td>'+per[i].spreaded_member_name+'</td><td>'+per[i].tender_success_amount+'</td>'
+                    tbody.appendChild(tr)
+                } 
             }else{
                 tb.style.display = ""
-                for(var i = 0;i < 3; i++){ //遍历一下json数据
-                    var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
-                    tbody.appendChild(trow);
-                }
+                for (let i = 0; i < 3; i++) {
+                    let tr = document.createElement('tr')
+                    tr.innerHTML = '<td>'+per[i].spreaded_member_name+'</td><td>'+per[i].tender_success_amount+'</td>'
+                    tbody.appendChild(tr)
+                } 
+    
             }
-            document.getElementById("income").innerHTML = result.data.income+"元"
-            document.getElementById("phoneNumberTx").innerHTML = shareUrl
-        });
-    })
-    function copyText(obj) {
-        var rng = document.body.createTextRange();
-        rng.moveToElementText(obj);
-        rng.scrollIntoView();
-        rng.select();
-        rng.execCommand("Copy");
-        rng.collapse(false);
-        alert("复制成功!");
     }
-    // window.onload = function(){
-    //     var tbody = document.getElementById('tbMain');
-    //     var per = [{
-    //         "id": 109,
-    //         "spreaded_member_name": "yb18069850856",
-    //         "status": 1,
-    //         "tender_success_amount": 0,
-    //         "spreaded_member_id": 109,
-    //         "repay_amount_yes": 0,
-    //         "add_time": 1527142654,
-    //         "member_name": "yb18069850856",
-    //         "type": 2,
-    //         "is_extension_red": "-1",
-    //         "member_id": 105
-    //     }, {
-    //         "id": 110,
-    //         "spreaded_member_name": "yw15824444396",
-    //         "status": 1,
-    //         "tender_success_amount": 0,
-    //         "spreaded_member_id": 110,
-    //         "repay_amount_yes": 0,
-    //         "add_time": 1527142702,
-    //         "member_name": "yw15824444396",
-    //         "type": 2,
-    //         "is_extension_red": "-1",
-    //         "member_id": 105
-    //     }]
-    //     var tb = document.getElementById('tb_main');
-    //     if (per.length == 0){
-    //         tb.style.display = "none"
-    //     }else{
-    //         tb.style.display = ""
-    //         for(var i = 0;i < per.length; i++){ //遍历一下json数据
-    //             var trow = getDataRow(per[i]); //定义一个方法,返回tr数据
-    //             tbody.appendChild(trow);
-    //         }
-    //     }
-    // }
 
-    function getDataRow(h) {
-        var row = document.createElement('tr'); //创建行
-        var idCell = document.createElement('td'); //创建第一列id
-        idCell.innerHTML = h.spreaded_member_name; //填充数据
-        row.appendChild(idCell); //加入行 ，下面类似
-        var nameCell = document.createElement('td');//创建第二列name
-        nameCell.innerHTML = h.tender_success_amount;
-        row.appendChild(nameCell);
-        var jobCell = document.createElement('td');//创建第三列job
-        jobCell.innerHTML = h.repay_amount_yes;
-        row.appendChild(jobCell);
-        return row; //返回tr数据
-    }
+
 </script>
 </body>
 </html>

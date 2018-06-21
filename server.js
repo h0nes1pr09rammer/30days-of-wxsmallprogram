@@ -11,7 +11,7 @@ var server = http.createServer(function (request, response) {
     // 将HTTP响应200写入response, 同时设置Content-Type: text/html:
     response.writeHead(200, {'Content-Type': 'text/html'});
     // 将HTTP响应的HTML内容写入response:
-    // response.end('<a href="index.html">活动页面</a>');
+    // response.end('<a href="index1.html">活动页面</a>');
 });
 
 // 让服务器监听8080端口:
